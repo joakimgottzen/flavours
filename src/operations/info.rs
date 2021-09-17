@@ -15,15 +15,15 @@ fn true_color(hex_color: &str, background: bool) -> Result<String> {
 }
 
 pub fn print_color(color: &str) -> Result<()> {
-    const RESETCOLOR: &str = "\x1b[0m";
+    const RESET_COLOR: &str = "\x1b[0m";
     match stdoutln!(
         "{} #{} {}  {}#{}{}",
         true_color(color, true)?,
         color,
-        RESETCOLOR,
+        RESET_COLOR,
         true_color(color, false)?,
         color,
-        RESETCOLOR
+        RESET_COLOR
     ) {
         Ok(_) => Ok(()),
         Err(e) => match e.kind() {
