@@ -201,7 +201,7 @@ pub fn apply(
 
     let mut hooks = Vec::new();
 
-    //Iterate configurated entries (templates)
+    //Iterate configured entries (templates)
     let items_legacy = config.item.unwrap_or_default();
     let mut items = config.items.unwrap_or_default();
     items.extend(items_legacy.into_iter()) ;
@@ -254,7 +254,7 @@ pub fn apply(
 
         //Template content
         let template_content = fs::read_to_string(subtemplate_file)
-                       .with_context(||format!("Couldn't read template {}/{} at {:?}. Check if the correct template/subtemplate was specified, and run the update templates command if you didn't already.", template, subtemplate, subtemplate_file))?;
+            .with_context(||format!("Couldn't read template {}/{} at {:?}. Check if the correct template/sub template was specified, and run the update templates command if you didn't already.", template, subtemplate, subtemplate_file))?;
 
         //Template with correct colors
         let built_template = build_template(template_content, &scheme)

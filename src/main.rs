@@ -11,7 +11,7 @@ use std::fs::{create_dir_all, write};
 fn main() -> Result<()> {
     let matches = cli::build_cli().get_matches();
 
-    // Completetions flag
+    // Completions flag
     if matches.is_present("completions") {
         return completions::completions(matches.value_of("completions"));
     };

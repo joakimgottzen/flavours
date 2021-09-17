@@ -62,7 +62,7 @@ pub fn build_cli() -> App<'static> {
                 .setting(AppSettings::ColoredHelp)
                 .arg(
                     Arg::new("pattern")
-                    .about("Scheme name or glob pattern to match when listing scheme(s). If ommited, defaults to * (all installed schemes).")
+                    .about("Scheme name or glob pattern to match when listing scheme(s). If omitted, defaults to * (all installed schemes).")
                     .setting(ArgSettings::MultipleValues)
                     .value_hint(ValueHint::Other)
                     .multiple_values(true)
@@ -76,7 +76,7 @@ pub fn build_cli() -> App<'static> {
         )
         .subcommand(
             App::new("info")
-                .about("Shows scheme colors for all schemes matching pattern. Optionally uses truecolor")
+                .about("Shows scheme colors for all schemes matching pattern. Optionally uses true color.")
                 .setting(AppSettings::UnifiedHelpMessage)
                 .setting(AppSettings::DeriveDisplayOrder)
                 .setting(AppSettings::DisableHelpSubcommand)
@@ -84,7 +84,7 @@ pub fn build_cli() -> App<'static> {
                 .setting(AppSettings::ColoredHelp)
                 .arg(
                     Arg::new("pattern")
-                    .about("Scheme name or glob pattern to match when showing scheme(s). If ommited, defaults to * (all installed schemes).")
+                    .about("Scheme name or glob pattern to match when showing scheme(s). If omitted, defaults to * (all installed schemes).")
                     .setting(ArgSettings::MultipleValues)
                     .value_hint(ValueHint::Other)
                     .multiple_values(true)
@@ -121,7 +121,7 @@ pub fn build_cli() -> App<'static> {
                     Arg::new("slug")
                     .long("slug")
                     .short('s')
-                    .about("Scheme slug (the name you specify when applying schemes) to output to. If ommited, defaults to 'generated'")
+                    .about("Scheme slug (the name you specify when applying schemes) to output to. If omitted, defaults to 'generated'")
                     .value_name("slug")
                     .takes_value(true)
                     .value_hint(ValueHint::Other)
@@ -160,7 +160,7 @@ pub fn build_cli() -> App<'static> {
                 .setting(AppSettings::ColoredHelp)
                 .arg(
                     Arg::new("pattern")
-                    .about("Scheme to be applied, supports glob. If more than one is specified (or if glob pattern matched more than one), chooses one randomly. If ommited, defaults to * (all installed schemes).")
+                    .about("Scheme to be applied, supports glob. If more than one is specified (or if glob pattern matched more than one), chooses one randomly. If omitted, defaults to * (all installed schemes).")
                     .value_hint(ValueHint::Other)
                     .setting(ArgSettings::MultipleValues)
                     .multiple_values(true)

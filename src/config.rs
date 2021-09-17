@@ -27,6 +27,6 @@ impl Config {
     /// Parse a TOML str into a Config struct
     pub fn read(contents: &str, path: &Path) -> Result<Config> {
         toml::from_str(contents)
-            .context(format!("Couldn't parse flavours configuration file ({:?}). Check if it's syntatically correct", path))
+            .context(format!("Couldn't parse flavours configuration file ({:?}). Check if it's syntactically correct", path))
     }
 }

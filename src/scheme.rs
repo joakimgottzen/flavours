@@ -49,7 +49,7 @@ impl Scheme {
     pub fn from_str(contents: &str, slug: &str) -> Result<Scheme> {
         let scheme_file: SchemeFile = serde_yaml::from_str(contents).with_context(|| {
             format!(
-                "Couldn't parse scheme {}. Check if it's syntatically correct.",
+                "Couldn't parse scheme {}. Check if it's syntactically correct.",
                 slug
             )
         })?;

@@ -47,7 +47,7 @@ fn get_sources(file: &Path) -> Result<(String, String)> {
         Err(_) => {
             // Try to write default repos to file
             write_sources(default_s_repo, default_t_repo, file)?;
-            // Try to open it again, returns errors if unsucessful again
+            // Try to open it again, returns errors if unsuccessful again
             File::open(file).with_context(|| format!("Couldn't access {:?}", file))?
         }
     };
@@ -55,7 +55,7 @@ fn get_sources(file: &Path) -> Result<(String, String)> {
     let mut s_repo = String::from(default_s_repo);
     let mut t_repo = String::from(default_t_repo);
 
-    // Bufreader from file
+    // BufReader from file
     let reader = BufReader::new(sources_file);
     // Iterate lines
     for line in reader.lines() {

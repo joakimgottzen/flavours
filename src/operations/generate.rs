@@ -120,7 +120,7 @@ fn dark_color(colors: &[Rgb], verbose: bool) -> Result<Rgb> {
     // Try to find a nice darkish color with at least a bit of color
     let mut dark = color_pass(colors, Some(0.012), Some(0.1), Some(0.18), Some(0.9));
 
-    // Try again, but now we will accept colors with any saturations, as long long as they're dark but not very dark
+    // Try again, but now we will accept colors with any saturation, as long long as they're dark but not very dark
     if dark == None {
         passes += 1;
         dark = color_pass(colors, Some(0.012), Some(0.1), None, None);
