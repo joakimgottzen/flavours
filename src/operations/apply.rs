@@ -8,7 +8,7 @@ use std::str;
 use std::thread;
 
 use crate::config::Config;
-use crate::find::find;
+use crate::find::get_schemes;
 use crate::operations::build::build_template;
 use crate::scheme::Scheme;
 
@@ -125,17 +125,7 @@ pub fn apply(
         (buffer, String::from("generated"))
     } else {
         //Find schemes that match given patterns
-        let mut schemes = Vec::new();
-        for pattern in patterns {
-            let found_schemes = find(pattern, &base_dir.join("base16").join("schemes"))?;
-
-            for found_scheme in found_schemes {
-                schemes.push(found_scheme);
-            }
-        }
-        //Sort and remove duplicates
-        schemes.sort();
-        schemes.dedup();
+        let schemes = get_schemes(patterns, base_dir)?;
 
         //Get random scheme
         let scheme_file = random(schemes)?;

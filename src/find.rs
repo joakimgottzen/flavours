@@ -22,3 +22,23 @@ pub fn find(pattern: &str, schemes_dir: &Path) -> Result<Vec<PathBuf>> {
 
     Ok(found)
 }
+
+/// Get schemes function
+///
+/// * `patterns`: Which pattern to use
+/// * `base_dir`: flavours base data dir
+pub fn get_schemes(patterns: Vec<&str>, base_dir: &Path) -> Result<Vec<PathBuf>> {
+    let mut schemes = Vec::new();
+    for pattern in patterns {
+        let found_schemes = find(pattern, &base_dir.join("base16").join("schemes"))?;
+
+        for found_scheme in found_schemes {
+            schemes.push(found_scheme);
+        }
+    }
+
+    //Sort and remove duplicates
+    schemes.sort();
+    schemes.dedup();
+    Ok(schemes)
+}
