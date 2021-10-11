@@ -11,3 +11,6 @@
 
 # Ignore direnv data
 .direnv
+
+# Ignore the IntelliJ IDEA directory
+.idea
