@@ -202,6 +202,11 @@ pub fn apply(
 
 
     for item in items.iter() {
+        // Is this a custom template
+        let custom = match &item.custom {
+            Some(value) => *value,
+            None => false,
+        };
         //Template name
         let template = &item.template;
         //Subtemplate name
@@ -234,16 +239,24 @@ pub fn apply(
         .trim()
         .to_lowercase();
 
-        //(sub)template file path
-        let subtemplate_file = &base_dir
-            .join("base16")
-            .join("templates")
-            .join(&template)
-            .join("templates")
-            .join(format!("{}.mustache", subtemplate));
+        let subtemplate_file = if custom {
+            // custom (sub)template file path
+            config_path.parent().unwrap()
+                .join("templates")
+                .join(&template)
+                .join(format!("{}.mustache", subtemplate))
+        } else {
+            //(sub)template file path
+            base_dir
+                .join("base16")
+                .join("templates")
+                .join(&template)
+                .join("templates")
+                .join(format!("{}.mustache", subtemplate))
+        };
 
         //Template content
-        let template_content = fs::read_to_string(subtemplate_file)
+        let template_content = fs::read_to_string(&subtemplate_file)
             .with_context(||format!("Couldn't read template {}/{} at {:?}. Check if the correct template/sub template was specified, and run the update templates command if you didn't already.", template, subtemplate, subtemplate_file))?;
 
         //Template with correct colors
@@ -260,7 +273,11 @@ pub fn apply(
                 .with_context(|| format!("Couldn't write to file {:?}.", file))?;
 
             if verbose {
-                println!("Wrote {}/{} on: {:?}", template, subtemplate, file)
+                if custom {
+                    println!("Wrote custom {}/{} on: {:?}", template, subtemplate, file)
+                } else {
+                    println!("Wrote {}/{} on: {:?}", template, subtemplate, file)
+                }
             }
         } else {
             //Or replace with delimiters
@@ -271,7 +288,11 @@ pub fn apply(
                 Err(error) => eprintln!("Couldn't replace lines in {:?}: {}", file, error),
             }
             if verbose {
-                println!("Wrote {}/{} on {:?}", template, subtemplate, file);
+                if custom {
+                    println!("Wrote custom {}/{} on: {:?}", template, subtemplate, file)
+                } else {
+                    println!("Wrote {}/{} on: {:?}", template, subtemplate, file)
+                }
             }
         }
 

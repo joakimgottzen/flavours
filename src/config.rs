@@ -14,6 +14,7 @@ pub struct Config {
 #[derive(Deserialize, Debug)]
 pub struct ConfigItem {
     pub file: String,
+    pub custom: Option<bool>,
     pub template: String,
     pub subtemplate: Option<String>,
     pub hook: Option<String>,
